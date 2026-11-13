@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#4f46e5">
+  <title>Ma liste de tâches</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="task-utils.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <div><p class="eyebrow">UN JOUR À LA FOIS</p><h1>Ma liste de tâches</h1><p>Organisez vos journées, simplement.</p></div>
+      <button id="new-task" type="button">+ Ajouter une tâche</button>
+    </header>
+    <p id="storage-warning" class="warning" role="alert" hidden>Le stockage local est indisponible. Vos modifications ne pourront pas être conservées après la fermeture de cette page.</p>
+    <section class="stats" aria-label="Résumé des tâches">
+      <div><strong id="todo-count">0</strong><span>À faire</span></div>
+      <div><strong id="done-count">0</strong><span>Terminées</span></div>
+      <div><strong id="late-count">0</strong><span>En retard</span></div>
+    </section>
+    <section class="panel" aria-labelledby="list-title">
+      <div class="section-heading"><div><h2 id="list-title">Mes tâches</h2><p>Les tâches urgentes apparaissent en premier.</p></div></div>
+      <div class="filters">
+        <label>Rechercher<input id="search" type="search" placeholder="Rechercher par titre"></label>
+        <label>Statut<select id="status-filter"><option value="all">Tous les statuts</option><option value="todo">À faire</option><option value="done">Terminées</option></select></label>
+        <label>Priorité<select id="priority-filter"><option value="all">Toutes les priorités</option><option value="high">Élevée</option><option value="normal">Normale</option><option value="low">Faible</option></select></label>
+        <label>Catégorie<select id="category-filter"><option value="all">Toutes les catégories</option></select></label>
+      </div>
+      <p id="list-message" class="empty" role="status" hidden></p>
+      <ul id="task-list" class="task-list" aria-label="Liste des tâches"></ul>
+    </section>
+    <footer>Vos tâches sont enregistrées uniquement dans ce navigateur.</footer>
+  </main>
+  <dialog id="task-dialog" aria-labelledby="form-title">
+    <form id="task-form">
+      <div class="dialog-heading"><h2 id="form-title">Ajouter une tâche</h2><button id="close-dialog" class="icon-button" type="button" aria-label="Fermer">×</button></div>
+      <label for="title">Titre <span aria-hidden="true">*</span></label><input id="title" name="title" required maxlength="120" autocomplete="off">
+      <label for="description">Description</label><textarea id="description" name="description" rows="3" maxlength="1000"></textarea>
+      <div class="form-grid"><div><label for="priority">Priorité</label><select id="priority" name="priority"><option value="normal">Normale</option><option value="high">Élevée</option><option value="low">Faible</option></select></div><div><label for="due-date">Date limite</label><input id="due-date" name="dueDate" type="date"></div></div>
+      <label for="category">Catégorie</label><input id="category" name="category" list="category-suggestions" maxlength="50" placeholder="Ex. : Travail, Personnel, Courses"><datalist id="category-suggestions"></datalist>
+      <div class="form-actions"><button id="cancel" type="button" class="secondary">Annuler</button><button type="submit">Enregistrer</button></div>
+    </form>
+  </dialog>
+</body>
+</html>
